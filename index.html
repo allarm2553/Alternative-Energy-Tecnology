@@ -171,6 +171,11 @@
       box-shadow: 0 0 20px rgba(99, 102, 241, 0.35) !important;
       transform: translateY(-2px);
     }
+    .diagram-active-card-lime {
+      border-color: rgba(132, 204, 22, 0.95) !important;
+      box-shadow: 0 0 20px rgba(132, 204, 22, 0.35) !important;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
@@ -9441,6 +9446,457 @@
             </div>
           </div>
         </div>
+
+        <!-- ===================================================================== -->
+        <!-- HARDWARE INTERCONNECTION & SMART IRRIGATION MODEL: SOLAR AGRI-IOT -->
+        <!-- ===================================================================== -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-seedling text-lime-400"></i> แผนภาพแบบจำลองการเชื่อมต่อฮาร์ดแวร์ระบบโซลาร์สมาร์ตฟาร์ม IoT (Solar Smart Farm Interconnection Model)
+              </h4>
+              <p class="text-xs text-slate-400 mt-0.5">คลิกที่อุปกรณ์หรือบล็อกวงจรในไดอะแกรมเพื่อดูรายละเอียดสเปก พอร์ตเชื่อมต่อ และหลักการทำงานแบบอินเทอร์แอคทีฟ</p>
+            </div>
+            <span class="text-[10px] bg-lime-500/10 text-lime-400 px-2.5 py-1 rounded border border-lime-500/30 font-semibold self-start sm:self-auto">
+              <i class="fa-solid fa-solar-panel text-lime-400 mr-1"></i> Solar PV Direct Drive + IoT Precision Drip
+            </span>
+          </div>
+
+          <!-- SVG Schematic Canvas (Standard viewBox="0 0 980 340") -->
+          <div class="w-full min-w-[780px] overflow-x-auto bg-slate-950/90 rounded-2xl p-3 sm:p-4 border border-slate-800/90 shadow-inner">
+            <svg viewBox="0 0 980 340" class="w-full h-auto select-none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Alignment Grid Pattern -->
+                <pattern id="u6farmGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.4"/>
+                </pattern>
+
+                <!-- Linear Gradients -->
+                <linearGradient id="pvFarmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1e3a8a"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="vfdInverterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#064e3b"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="pumpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0369a1"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+                <linearGradient id="tankGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0284c7"/>
+                  <stop offset="100%" stop-color="#082f49"/>
+                </linearGradient>
+                <linearGradient id="farmNodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#365314"/>
+                  <stop offset="100%" stop-color="#14532d"/>
+                </linearGradient>
+                <linearGradient id="dripDripGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#022c22"/>
+                  <stop offset="100%" stop-color="#064e3b"/>
+                </linearGradient>
+
+                <!-- Fluid / Arrow Markers -->
+                <marker id="arrowWater" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+                </marker>
+                <marker id="arrowSolarDc" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
+                </marker>
+                <marker id="arrowSignal" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#a3e635"/>
+                </marker>
+              </defs>
+
+              <!-- Grid Background -->
+              <rect width="980" height="340" fill="url(#u6farmGrid)"/>
+
+              <!-- Stage Dividing Banners -->
+              <g opacity="0.85">
+                <rect x="20" y="10" width="165" height="20" rx="4" fill="#1e3a8a" fill-opacity="0.2" stroke="#3b82f6" stroke-width="0.8"/>
+                <text x="102" y="24" fill="#60a5fa" font-size="8" font-weight="bold" text-anchor="middle">STAGE 1: SOLAR PV ARRAY</text>
+
+                <rect x="205" y="10" width="285" height="20" rx="4" fill="#065f46" fill-opacity="0.2" stroke="#10b981" stroke-width="0.8"/>
+                <text x="347" y="24" fill="#6ee7b7" font-size="8" font-weight="bold" text-anchor="middle">STAGE 2: MPPT VFD &amp; DEEP-WELL BLDC PUMP</text>
+
+                <rect x="510" y="10" width="145" height="20" rx="4" fill="#0284c7" fill-opacity="0.2" stroke="#38bdf8" stroke-width="0.8"/>
+                <text x="582" y="24" fill="#7dd3fc" font-size="8" font-weight="bold" text-anchor="middle">STAGE 3: WATER STORAGE</text>
+
+                <rect x="675" y="10" width="285" height="20" rx="4" fill="#3f6212" fill-opacity="0.2" stroke="#84cc16" stroke-width="0.8"/>
+                <text x="817" y="24" fill="#bef264" font-size="8" font-weight="bold" text-anchor="middle">STAGE 4: IOT PRECISION DRIP IRRIGATION</text>
+              </g>
+
+              <!-- ================= FLOW PIPES & ELECTRICAL LINES ================= -->
+              <!-- 1. DC Power Flow from PV Combiner to MPPT VFD Inverter -->
+              <path d="M 175 110 L 220 110" fill="none" stroke="#ef4444" stroke-width="3" class="flow-line-dc" marker-end="url(#arrowSolarDc)"/>
+              <path d="M 175 130 L 220 130" fill="none" stroke="#64748b" stroke-width="2.5"/>
+              <text x="198" y="102" fill="#f87171" font-size="6.5" font-weight="bold" text-anchor="middle">DC+ (380V)</text>
+              <text x="198" y="142" fill="#94a3b8" font-size="6" text-anchor="middle">DC- (Return)</text>
+
+              <!-- 2. 3-Phase AC / BLDC Motor Cable from Inverter to Submersible Pump -->
+              <path d="M 335 125 L 375 125" fill="none" stroke="#38bdf8" stroke-width="2.5" class="flow-line-ac"/>
+              <path d="M 335 135 L 375 135" fill="none" stroke="#fb923c" stroke-width="2.5" class="flow-line-ac"/>
+              <path d="M 335 145 L 375 145" fill="none" stroke="#a855f7" stroke-width="2.5" class="flow-line-ac"/>
+              <text x="355" y="116" fill="#7dd3fc" font-size="6.5" font-weight="bold" text-anchor="middle">U, V, W 3~</text>
+
+              <!-- 3. High-Pressure Water Pipe from Pump to Elevated Tank -->
+              <path d="M 480 135 L 525 135" fill="none" stroke="#0ea5e9" stroke-width="4.5" class="flow-line-dc" marker-end="url(#arrowWater)"/>
+              <text x="502" y="125" fill="#38bdf8" font-size="7" font-weight="bold" text-anchor="middle">ท่อส่งน้ำ PE 2"</text>
+              <text x="502" y="148" fill="#0284c7" font-size="6" text-anchor="middle">แรงดันสูบขึ้นถัง</text>
+
+              <!-- 4. Water Outlet Pipe from Tank to Solenoid Valve & Field -->
+              <path d="M 640 180 L 800 180 L 800 205" fill="none" stroke="#0284c7" stroke-width="3.5" class="flow-line-dc" marker-end="url(#arrowWater)"/>
+              <text x="715" y="172" fill="#38bdf8" font-size="6.5" font-weight="bold" text-anchor="middle">ท่อเมนจ่ายน้ำสู่แปลงเกษตร (Gravity Feed 1.5")</text>
+
+              <!-- 5. RS-485 / Control Wire from IoT Node to VFD & Solenoid -->
+              <path d="M 740 100 L 710 100 L 710 230 L 785 230" fill="none" stroke="#a3e635" stroke-width="1.8" stroke-dasharray="4 3" class="flow-line-gas" marker-end="url(#arrowSignal)"/>
+              <text x="735" y="242" fill="#a3e635" font-size="6" font-weight="bold" text-anchor="middle">สัญญาณสั่งเปิด/ปิดวาล์ว (12V Relay Control)</text>
+
+              <!-- 6. Ultrasonic Sensor Signal Wire from Tank to IoT Node -->
+              <path d="M 585 70 L 585 55 L 775 55 L 775 68" fill="none" stroke="#facc15" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <text x="680" y="50" fill="#fde047" font-size="6" font-weight="bold" text-anchor="middle">ระดับน้ำ 4-20mA / Modbus</text>
+
+              <!-- 7. Soil Sensor Wire from Crop Field to IoT Node -->
+              <path d="M 885 240 L 885 130 L 860 130" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <text x="925" y="185" fill="#67e8f9" font-size="6" font-weight="bold" text-anchor="middle">RS485 ดิน (NPK/EC)</text>
+
+              <!-- ================= 1. SOLAR PV ARRAY & COMBINER ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 1)">
+                <rect x="25" y="45" width="150" height="260" rx="8" fill="url(#pvFarmGrad)" stroke="#3b82f6" stroke-width="1.8"/>
+                <text x="100" y="65" fill="#e2e8f0" font-size="8.5" font-weight="bold" text-anchor="middle">แผงโซลาร์เซลล์เกษตรกรรม</text>
+                <text x="100" y="76" fill="#93c5fd" font-size="6.5" text-anchor="middle">Solar PV Array (Mono Half-Cell)</text>
+
+                <!-- PV Panel Visual Grids -->
+                <g transform="translate(35, 86)">
+                  <rect x="0" y="0" width="130" height="70" rx="4" fill="#0f172a" stroke="#60a5fa" stroke-width="1.2"/>
+                  <!-- Solar Cells -->
+                  <line x1="0" y1="23" x2="130" y2="23" stroke="#1e3a8a" stroke-width="1"/>
+                  <line x1="0" y1="47" x2="130" y2="47" stroke="#1e3a8a" stroke-width="1"/>
+                  <line x1="32" y1="0" x2="32" y2="70" stroke="#1e3a8a" stroke-width="1"/>
+                  <line x1="65" y1="0" x2="65" y2="70" stroke="#1e3a8a" stroke-width="1"/>
+                  <line x1="97" y1="0" x2="97" y2="70" stroke="#1e3a8a" stroke-width="1"/>
+                  <text x="65" y="38" fill="#93c5fd" font-size="8" font-weight="bold" text-anchor="middle">8 x 550W Series</text>
+                  <text x="65" y="52" fill="#38bdf8" font-size="6.5" font-weight="bold" text-anchor="middle">P_max = 4.4 kWp</text>
+                </g>
+
+                <!-- DC Combiner Box & Protection -->
+                <g transform="translate(35, 168)">
+                  <rect x="0" y="0" width="130" height="52" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+                  <text x="65" y="14" fill="#fde68a" font-size="7" font-weight="bold" text-anchor="middle">กล่องรวมสายและเซฟตี้ (Combiner Box)</text>
+                  <text x="15" y="28" fill="#cbd5e1" font-size="6">• DC Isolator Switch: 1000V 32A</text>
+                  <text x="15" y="38" fill="#cbd5e1" font-size="6">• DC Fuse: 15A 1000V gPV Type</text>
+                  <text x="15" y="47" fill="#cbd5e1" font-size="6">• DC SPD: Class II 1000V (Surge Protection)</text>
+                </g>
+
+                <!-- Grounding Rod -->
+                <g transform="translate(35, 228)">
+                  <rect x="0" y="0" width="130" height="24" rx="3" fill="#1e293b" stroke="#10b981" stroke-width="0.8"/>
+                  <text x="65" y="11" fill="#6ee7b7" font-size="6.5" font-weight="bold" text-anchor="middle">หลักดินระบบลานโซลาร์ (Grounding PE)</text>
+                  <text x="65" y="20" fill="#94a3b8" font-size="5.5" text-anchor="middle">ความต้านทานดิน &lt; 5 โอห์ม ป้องกันฟ้าผ่า</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="35" y="278" width="130" height="16" rx="3" fill="#1d4ed8"/>
+                <text x="100" y="289" fill="#ffffff" font-size="7.5" font-weight="bold" text-anchor="middle">1. Solar PV Array &amp; Combiner</text>
+              </g>
+
+              <!-- ================= 2. SOLAR VFD PUMP INVERTER ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 2)">
+                <rect x="220" y="45" width="115" height="260" rx="8" fill="url(#vfdInverterGrad)" stroke="#10b981" stroke-width="1.8"/>
+                <text x="277" y="65" fill="#e2e8f0" font-size="8.5" font-weight="bold" text-anchor="middle">อินเวอร์เตอร์ปั๊มพลังงานแสงอาทิตย์</text>
+                <text x="277" y="76" fill="#6ee7b7" font-size="6.5" text-anchor="middle">Solar Pump Inverter (VFD)</text>
+
+                <!-- MPPT Frequency Tracking Display -->
+                <g transform="translate(230, 86)">
+                  <rect x="0" y="0" width="95" height="42" rx="3" fill="#022c22" stroke="#34d399" stroke-width="1"/>
+                  <text x="47" y="14" fill="#a7f3d0" font-size="6" text-anchor="middle">ความถี่ขับรอบ (Output Freq)</text>
+                  <text x="47" y="29" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle" font-mono>50.0 Hz</text>
+                  <text x="47" y="38" fill="#6ee7b7" font-size="5.5" text-anchor="middle">MPPT Efficiency &gt; 99%</text>
+                </g>
+
+                <!-- Dry Run & Overload Protection -->
+                <g transform="translate(230, 136)">
+                  <rect x="0" y="0" width="95" height="52" rx="3" fill="#0f172a" stroke="#059669" stroke-width="0.8"/>
+                  <text x="47" y="12" fill="#6ee7b7" font-size="6.5" font-weight="bold" text-anchor="middle">ระบบปกป้องอัตโนมัติ</text>
+                  <text x="10" y="24" fill="#cbd5e1" font-size="5.5">• Dry-Run (บ่อแห้งตัดใน 5s)</text>
+                  <text x="10" y="33" fill="#cbd5e1" font-size="5.5">• Soft-Start ลดกระแสสตาร์ต</text>
+                  <text x="10" y="42" fill="#cbd5e1" font-size="5.5">• Over-Voltage / Stall Lock</text>
+                  <text x="10" y="49" fill="#cbd5e1" font-size="5.5">• Auto-Wakeup เมื่อแดดออก</text>
+                </g>
+
+                <!-- Modbus RS-485 Terminal -->
+                <g transform="translate(230, 196)">
+                  <rect x="0" y="0" width="95" height="34" rx="3" fill="#1e1b4b" stroke="#6366f1" stroke-width="0.8"/>
+                  <text x="47" y="12" fill="#c7d2fe" font-size="6.5" font-weight="bold" text-anchor="middle">Modbus RTU พอร์ต</text>
+                  <text x="47" y="22" fill="#a5b4fc" font-size="5.5" text-anchor="middle">ส่งค่า Hz, Watts, Flow Rate</text>
+                  <text x="47" y="30" fill="#94a3b8" font-size="5.5" text-anchor="middle">ไปยัง IoT Farm Gateway</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="230" y="278" width="95" height="16" rx="3" fill="#047857"/>
+                <text x="277" y="289" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">2. Solar VFD Inverter</text>
+              </g>
+
+              <!-- ================= 3. SUBMERSIBLE DEEP-WELL BLDC PUMP ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 3)">
+                <rect x="375" y="45" width="105" height="260" rx="8" fill="url(#pumpGrad)" stroke="#0ea5e9" stroke-width="1.8"/>
+                <text x="427" y="65" fill="#e2e8f0" font-size="8.5" font-weight="bold" text-anchor="middle">ปั๊มบาดาลโซลาร์เซลล์</text>
+                <text x="427" y="76" fill="#7dd3fc" font-size="6.5" text-anchor="middle">Deep-Well Submersible Pump</text>
+
+                <!-- Pump Motor Cutaway -->
+                <g transform="translate(385, 86)">
+                  <rect x="0" y="0" width="85" height="95" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+                  <!-- Impeller Stages -->
+                  <rect x="10" y="10" width="65" height="12" rx="2" fill="#0284c7"/>
+                  <text x="42" y="19" fill="#ffffff" font-size="6" text-anchor="middle">Stage 1 Impeller</text>
+                  <rect x="10" y="26" width="65" height="12" rx="2" fill="#0284c7"/>
+                  <text x="42" y="35" fill="#ffffff" font-size="6" text-anchor="middle">Stage 2 Impeller</text>
+                  <rect x="10" y="42" width="65" height="12" rx="2" fill="#0284c7"/>
+                  <text x="42" y="51" fill="#ffffff" font-size="6" text-anchor="middle">Stage 3 Impeller</text>
+                  <!-- BLDC Magnet Rotor -->
+                  <rect x="15" y="60" width="55" height="28" rx="3" fill="#1e293b" stroke="#f59e0b" stroke-width="0.8"/>
+                  <text x="42" y="73" fill="#fde68a" font-size="6" font-weight="bold" text-anchor="middle">BLDC Rotor</text>
+                  <text x="42" y="83" fill="#94a3b8" font-size="5.5" text-anchor="middle">Permanent Magnet</text>
+                </g>
+
+                <!-- Pump Specifications Box -->
+                <g transform="translate(385, 190)">
+                  <rect x="0" y="0" width="85" height="52" rx="3" fill="#082f49" stroke="#0ea5e9" stroke-width="0.8"/>
+                  <text x="42" y="12" fill="#7dd3fc" font-size="6.5" font-weight="bold" text-anchor="middle">สเปกปั๊มบาดาล</text>
+                  <text x="8" y="24" fill="#cbd5e1" font-size="5.5">• กำลัง: 2,200W (3 HP)</text>
+                  <text x="8" y="33" fill="#cbd5e1" font-size="5.5">• อัตราไหล: 12,000 L/hr</text>
+                  <text x="8" y="42" fill="#cbd5e1" font-size="5.5">• ระยะส่งสูง (Head): 75m</text>
+                  <text x="8" y="49" fill="#cbd5e1" font-size="5.5">• บอดี้: Stainless SUS304</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="385" y="278" width="85" height="16" rx="3" fill="#0284c7"/>
+                <text x="427" y="289" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">3. Submersible Pump</text>
+              </g>
+
+              <!-- ================= 4. ELEVATED WATER STORAGE TANK ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 4)">
+                <rect x="525" y="45" width="115" height="260" rx="8" fill="url(#tankGrad)" stroke="#38bdf8" stroke-width="1.8"/>
+                <text x="582" y="65" fill="#e0f2fe" font-size="8.5" font-weight="bold" text-anchor="middle">หอถังพักน้ำยกระดับสูง</text>
+                <text x="582" y="76" fill="#7dd3fc" font-size="6.5" text-anchor="middle">Elevated Water Tower (Gravity)</text>
+
+                <!-- Water Tank Visual with Fluid Fill -->
+                <g transform="translate(535, 86)">
+                  <!-- Tank Outer Body -->
+                  <rect x="0" y="0" width="95" height="110" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+                  <!-- Fluid Level 65% -->
+                  <rect x="3" y="35" width="89" height="72" rx="5" fill="#0284c7" fill-opacity="0.6"/>
+                  <line x1="3" y1="35" x2="92" y2="35" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+                  <text x="47" y="55" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">65% LEVEL</text>
+                  <text x="47" y="68" fill="#bae6fd" font-size="6.5" text-anchor="middle">(1,300 ลิตร / 2,000L)</text>
+                  <text x="47" y="90" fill="#7dd3fc" font-size="6" text-anchor="middle">หอสูง 8 เมตร จ่ายน้ำแรงดันสถิต</text>
+                </g>
+
+                <!-- Ultrasonic Level Transmitter -->
+                <g transform="translate(535, 206)">
+                  <rect x="0" y="0" width="95" height="42" rx="3" fill="#082f49" stroke="#facc15" stroke-width="0.8"/>
+                  <circle cx="15" cy="15" r="5" fill="#eab308"/>
+                  <text x="25" y="14" fill="#fde047" font-size="6.5" font-weight="bold">เซนเซอร์วัดระดับน้ำ</text>
+                  <text x="25" y="24" fill="#cbd5e1" font-size="5.5">Ultrasonic Tank Sensor</text>
+                  <text x="10" y="36" fill="#38bdf8" font-size="5.5">ความแม่นยำ ±2mm ไม่สัมผัสน้ำ</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="535" y="278" width="95" height="16" rx="3" fill="#0369a1"/>
+                <text x="582" y="289" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">4. Elevated Water Tank</text>
+              </g>
+
+              <!-- ================= 5. IOT IRRIGATION CONTROLLER NODE ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 5)">
+                <rect x="685" y="45" width="125" height="260" rx="8" fill="url(#farmNodeGrad)" stroke="#84cc16" stroke-width="1.8"/>
+                <text x="747" y="65" fill="#f7fee7" font-size="8.5" font-weight="bold" text-anchor="middle">โหนดควบคุมฟาร์มอัจฉริยะ</text>
+                <text x="747" y="76" fill="#bef264" font-size="6.5" text-anchor="middle">IoT Agri-Edge Gateway (ESP32)</text>
+
+                <!-- Dual Microcontroller & Transceiver -->
+                <g transform="translate(695, 86)">
+                  <rect x="0" y="0" width="105" height="52" rx="4" fill="#0f172a" stroke="#a3e635" stroke-width="1"/>
+                  <text x="52" y="14" fill="#d9f99d" font-size="7" font-weight="bold" text-anchor="middle">ESP32-S3 IoT Brain</text>
+                  <text x="52" y="26" fill="#cbd5e1" font-size="6" text-anchor="middle">• Wi-Fi &amp; 4G Cat-1 Modem</text>
+                  <text x="52" y="36" fill="#cbd5e1" font-size="6" text-anchor="middle">• MQTT Telemetry Publishing</text>
+                  <text x="52" y="46" fill="#a3e635" font-size="5.5" font-weight="bold" text-anchor="middle">Topic: farm/irrigation/state</text>
+                </g>
+
+                <!-- Relay & Solenoid Driver Stage -->
+                <g transform="translate(695, 146)">
+                  <rect x="0" y="0" width="105" height="54" rx="4" fill="#0f172a" stroke="#eab308" stroke-width="0.8"/>
+                  <text x="52" y="14" fill="#fde047" font-size="6.5" font-weight="bold" text-anchor="middle">วงจรขับวาล์วไฟฟ้า (Driver)</text>
+                  <text x="10" y="26" fill="#cbd5e1" font-size="5.5">• Solid-State Relay 12V 5A</text>
+                  <text x="10" y="36" fill="#cbd5e1" font-size="5.5">• Flyback Protection Diode</text>
+                  <text x="10" y="46" fill="#4ade80" font-size="5.5" font-weight="bold">• สถานะ: OPEN (จ่ายน้ำอัตโนมัติ)</text>
+                </g>
+
+                <!-- Solar Back-up Power LiFePO4 -->
+                <g transform="translate(695, 208)">
+                  <rect x="0" y="0" width="105" height="34" rx="3" fill="#14532d" stroke="#22c55e" stroke-width="0.8"/>
+                  <text x="52" y="13" fill="#bbf7d0" font-size="6" font-weight="bold" text-anchor="middle">ชุดสำรองไฟโหนด 12V LiFePO4</text>
+                  <text x="52" y="24" fill="#86efac" font-size="5.5" text-anchor="middle">ทำงานได้ต่อเนื่อง 72 ชม. แม้ฝนตก</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="695" y="278" width="105" height="16" rx="3" fill="#4d7c0f"/>
+                <text x="747" y="289" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">5. IoT Farm Controller</text>
+              </g>
+
+              <!-- ================= 6. SOLENOID VALVE & DRIP IRRIGATION FIELD ================= -->
+              <g class="diagram-node" onclick="highlightEquipment('u6farm', 6)">
+                <rect x="835" y="45" width="125" height="260" rx="8" fill="url(#dripDripGrad)" stroke="#22c55e" stroke-width="1.8"/>
+                <text x="897" y="65" fill="#f0fdf4" font-size="8.5" font-weight="bold" text-anchor="middle">ระบบน้ำหยดและเซนเซอร์ดิน</text>
+                <text x="897" y="76" fill="#86efac" font-size="6.5" text-anchor="middle">Solenoid &amp; Precision Drip</text>
+
+                <!-- Solenoid Valve Module -->
+                <g transform="translate(845, 86)">
+                  <rect x="0" y="0" width="105" height="42" rx="3" fill="#0f172a" stroke="#0ea5e9" stroke-width="1"/>
+                  <circle cx="15" cy="21" r="7" fill="#0284c7"/>
+                  <text x="15" y="24" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">V1</text>
+                  <text x="28" y="16" fill="#7dd3fc" font-size="7" font-weight="bold">โซลินอยด์วาล์ว 12V DC</text>
+                  <text x="28" y="26" fill="#cbd5e1" font-size="5.5">เกลียว 1" ทองเหลืองกันน้ำ IP68</text>
+                  <text x="28" y="36" fill="#4ade80" font-size="5.5" font-weight="bold">สถานะ: เปิดน้ำ 28.5 L/min</text>
+                </g>
+
+                <!-- Drip Irrigation Emitter Network -->
+                <g transform="translate(845, 136)">
+                  <rect x="0" y="0" width="105" height="46" rx="3" fill="#022c22" stroke="#10b981" stroke-width="0.8"/>
+                  <text x="52" y="13" fill="#a7f3d0" font-size="6.5" font-weight="bold" text-anchor="middle">สายน้ำหยดชดเชยแรงดัน (PC Drip)</text>
+                  <text x="10" y="24" fill="#cbd5e1" font-size="5.5">• ท่อ PE 16mm ระยะหัวหยด 30cm</text>
+                  <text x="10" y="33" fill="#cbd5e1" font-size="5.5">• อัตราหยด 2.0 ลิตร/ชม./หัว</text>
+                  <text x="10" y="42" fill="#6ee7b7" font-size="5.5">• ประหยัดน้ำกว่าสปริงเกลอร์ 65%</text>
+                </g>
+
+                <!-- Soil Moisture & NPK Sensor Probe -->
+                <g transform="translate(845, 190)">
+                  <rect x="0" y="0" width="105" height="52" rx="3" fill="#0f172a" stroke="#06b6d4" stroke-width="0.8"/>
+                  <text x="52" y="13" fill="#67e8f9" font-size="6.5" font-weight="bold" text-anchor="middle">เซนเซอร์ดิน 7-in-1 (RS485)</text>
+                  <text x="10" y="24" fill="#cbd5e1" font-size="5.5">• ความชื้นในดิน: 35% (แจ้งรดน้ำ)</text>
+                  <text x="10" y="33" fill="#cbd5e1" font-size="5.5">• อุณหภูมิดิน: 28.4 °C</text>
+                  <text x="10" y="42" fill="#cbd5e1" font-size="5.5">• ค่าการนำไฟฟ้า EC: 1.2 mS/cm</text>
+                  <text x="10" y="49" fill="#cbd5e1" font-size="5.5">• โพรโทคอล Modbus RTU</text>
+                </g>
+
+                <!-- Label Badge -->
+                <rect x="845" y="278" width="105" height="16" rx="3" fill="#15803d"/>
+                <text x="897" y="289" fill="#ffffff" font-size="7" font-weight="bold" text-anchor="middle">6. Drip Lines &amp; Soil Sensor</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Synchronized 6-Card Equipment Catalog (u6farmCard1 to u6farmCard6) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+            <!-- Card 1: Solar PV Array & Combiner -->
+            <div id="u6farmCard1" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 1
+                </span>
+                <i class="fa-solid fa-solar-panel text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">แผงโซลาร์เซลล์เกษตรกรรมและกล่องคอมบายเนอร์ (Solar PV Array &amp; DC Combiner)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                แหล่งกำเนิดพลังงานหลักสำหรับขับเคลื่อนระบบสูบน้ำแบบ Direct Drive โดยไม่จำเป็นต้องใช้แบตเตอรี่ในวงจรสูบน้ำ ประกอบด้วยแผงโซลาร์ชนิด Monocrystalline Half-Cell ขนาด 550W ต่ออนุกรมกันสร้างแรงดัน DC Bus 380V พร้อมตู้คอมบายเนอร์ป้องกันฟ้าผ่า (DC SPD Class II 1000V) และฟิวส์ gPV 15A
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: ขั้วต่อ MC4 สตริงโซลาร์ เข้าสู่เบรกเกอร์ DC Isolator 1000V 32A ในตู้สวิตช์สนาม</div>
+                <div class="text-slate-400">• สเปกสำคัญ: พิกัดกำลังรวม 4.4 kWp (8 แผง x 550W), Vmp = 340V, Imp = 13.0A, มาตรฐาน IEC 61215/61730</div>
+              </div>
+            </div>
+
+            <!-- Card 2: Solar VFD Pump Inverter -->
+            <div id="u6farmCard2" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 2
+                </span>
+                <i class="fa-solid fa-microchip text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">อินเวอร์เตอร์ปั๊มน้ำพลังงานแสงอาทิตย์ (Solar Variable Frequency Drive - VFD)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ตัวแปลงไฟฟ้ากระแสตรงจากแผงโซลาร์เป็นไฟฟ้า 3 เฟสสำหรับขับมอเตอร์ปั๊ม พร้อมอัลกอริทึม MPPT ความเร็วสูง ปรับความถี่รอบตามความเข้มแสงแดดแบบเรียลไทม์ (20-50Hz) มีฟังก์ชันป้องกันน้ำแห้งบ่อบาดาล (Dry-Run Protection) สตาร์ตมอเตอร์แบบนุ่มนวล (Soft-Start) และพอร์ตสื่อสาร Modbus RTU รายงานสถานะ
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: อินพุต DC+/DC- จากแผงโซลาร์, เอาต์พุต 3 เฟส U/V/W ไปยังมอเตอร์ปั๊ม, พอร์ต RS485 A/B</div>
+                <div class="text-slate-400">• สเปกสำคัญ: กำลัง 3.0 kW (4 HP), ช่วง MPPT 250V-420VDC, ประสิทธิภาพ MPPT &gt; 99.2%, มาตรฐานกันฝุ่นน้ำ IP65</div>
+              </div>
+            </div>
+
+            <!-- Card 3: Deep-Well Submersible BLDC Pump -->
+            <div id="u6farmCard3" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 3
+                </span>
+                <i class="fa-solid fa-water text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">ปั๊มบาดาลจุ่มน้ำไร้แปรงถ่าน (Submersible Deep-Well BLDC Pump)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ปั๊มสูบน้ำลึกบาดาลประสิทธิภาพสูง ใช้มอเตอร์กระแสตรงไร้แปรงถ่านชนิดแม่เหล็กถาวร (Permanent Magnet Synchronous Motor / BLDC) เสื้อปั๊มและใบพัดทำจากสเตนเลสสตีล SUS304 ทนทานต่อการกัดกร่อนจากตะกอนทราย ให้ปริมาณน้ำสูงและทำงานได้ต่อเนื่องแม้อยู่ในสภาวะแสงแดดอ่อนช่วงเช้าหรือเย็น
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: สายเคเบิลกันน้ำใต้น้ำ 3 คอร์ (3 x 4 mm²) ต่อเข้าท่อส่งน้ำโพลีเอทิลีน PE ความหนาแน่นสูง (HDPE 2")</div>
+                <div class="text-slate-400">• สเปกสำคัญ: พิกัด 2,200W (3 HP), อัตราการสูบสูงสุด 12 ลบ.ม./ชม., ระยะส่งน้ำสูงสุด (Max Head) 75 เมตร</div>
+              </div>
+            </div>
+
+            <!-- Card 4: Elevated Water Tower -->
+            <div id="u6farmCard4" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 4
+                </span>
+                <i class="fa-solid fa-tower-observation text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">หอถังพักน้ำยกระดับสูงและเซนเซอร์ระดับน้ำ (Elevated Water Tower &amp; Ultrasonic Sensor)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                แนวคิด "เปลี่ยนพลังงานแสงแดดเป็นพลังงานศักย์ของน้ำ" (Solar Energy to Potential Energy Storage) โดยสูบน้ำขึ้นเก็บไว้บนหอถังความสูง 8 เมตรในเวลากลางวันที่มีแดด เพื่อจ่ายน้ำสู่แปลงเกษตรด้วยแรงโน้มถ่วง (Gravity-Fed) ได้ตลอด 24 ชั่วโมง ติดตั้งเซนเซอร์อัลตราโซนิกตรวจจับระดับน้ำแบบไม่สัมผัสเพื่อตัด-ต่อปั๊มอัตโนมัติ
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: เซนเซอร์ Ultrasonic ส่งสัญญาณ 4-20mA หรือ Modbus RS-485 เข้ากล่องควบคุม IoT ฟาร์ม</div>
+                <div class="text-slate-400">• สเปกสำคัญ: ความจุถัง 2,000 ลิตร (Polymer Food-Grade), เสาทาวเวอร์สูง 8 เมตร แรงดันสถิตจ่ายน้ำ ~0.8 bar</div>
+              </div>
+            </div>
+
+            <!-- Card 5: IoT Agri-Edge Gateway -->
+            <div id="u6farmCard5" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 5
+                </span>
+                <i class="fa-solid fa-wifi text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">โหนดสมองกลควบคุมฟาร์มอัจฉริยะ (IoT Agri-Edge Gateway &amp; Relay Unit)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                กล่องควบคุมอัจฉริยะประมวลผลด้วยไมโครคอนโทรลเลอร์ ESP32-S3 พร้อมระบบเชื่อมต่อสัญญาณคู่ Wi-Fi และโมเด็ม 4G Cat-1 ทำหน้าที่อ่านค่าความชื้นในดินและระดับน้ำ คำนวณลอจิกการให้น้ำแม่นยำอัตโนมัติ ส่งสัญญาณควบคุมโซลิดสเตตรีเลย์ (SSR) ขับวาล์วน้ำโซลินอยด์ พร้อมส่งข้อมูลเข้าแดชบอร์ด MQTT
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: ขั้วต่อควบคุมวาล์ว 12VDC, พอร์ต RS-485 เซนเซอร์ดิน, พอร์ตรับระดับน้ำ, แบตเตอรี่สำรอง LiFePO4 12V 10Ah</div>
+                <div class="text-slate-400">• สเปกสำคัญ: ESP32 Dual-Core 240MHz, ไดรเวอร์รีเลย์แยกกัลวานิก, โพรโทคอล MQTT over TLS 1.3, กันน้ำ IP66</div>
+              </div>
+            </div>
+
+            <!-- Card 6: Precision Drip Network & Soil Sensor -->
+            <div id="u6farmCard6" class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5 transition-all hover:border-lime-500/50">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-lime-400 px-2 py-0.5 rounded bg-lime-500/10 border border-lime-500/20">
+                  อุปกรณ์ที่ 6
+                </span>
+                <i class="fa-solid fa-faucet-drip text-lime-400 text-lg"></i>
+              </div>
+              <h5 class="text-sm font-bold text-white">เครือข่ายน้ำหยดแม่นยำและโพรบวัดดิน (Precision Drip Lines &amp; Multi-Soil Probe)</h5>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                ปลายทางระบบจ่ายน้ำแปลงเกษตร ควบคุมการเปิด-ปิดด้วยโซลินอยด์วาล์วทองเหลือง 12V ชนิดเปิดค้างเมื่อมีไฟ (Normally Closed) จ่ายน้ำเข้าสู่ท่อน้ำหยดชดเชยแรงดัน (Pressure-Compensating Drip Lines) ส่งน้ำตรงสู่รากพืชโดยตรง พร้อมโพรบวัดความชื้น/อุณหภูมิ/EC/NPK ในดิน เพื่อหยุดรดน้ำทันทีเมื่อดินอิ่มตัว
+              </p>
+              <div class="text-[11px] p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 space-y-1">
+                <div class="text-lime-300 font-semibold">• จุดเชื่อมต่อ: โซลินอยด์วาล์วเกลียว 1" ทองเหลือง, ท่อแยก LDPE 16mm, หัวน้ำหยด 2.0 L/hr, โพรบสเตนเลส SUS316</div>
+                <div class="text-slate-400">• สเปกสำคัญ: แรงดันทำงานวาล์ว 0.2 - 8.0 bar, ความแม่นยำเซนเซอร์ดิน ±2% VWC, ช่วยประหยัดน้ำชลประทานได้ 60-70%</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ===================================================================== -->
@@ -9873,6 +10329,7 @@
       else if (system === 'u2sensor') activeClass = 'diagram-active-card-cyan';
       else if (system === 'u3tracker') activeClass = 'diagram-active-card-blue';
       else if (system === 'u3iot') activeClass = 'diagram-active-card-indigo';
+      else if (system === 'u6farm') activeClass = 'diagram-active-card-lime';
       
       // Clear previous active highlights in this system
       for (let i = 1; i <= 6; i++) {
@@ -9886,7 +10343,8 @@
             'diagram-active-card-emerald',
             'diagram-active-card-cyan',
             'diagram-active-card-blue',
-            'diagram-active-card-indigo'
+            'diagram-active-card-indigo',
+            'diagram-active-card-lime'
           );
         }
       }
