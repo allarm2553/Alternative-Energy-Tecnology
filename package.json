@@ -1,0 +1,18 @@
+{
+  "name": "renewable-energy-iot-learning-app",
+  "version": "1.0.0",
+  "description": "Smart Renewable Energy and IoT Learning Portal with Interactive Virtual Labs",
+  "scripts": {
+    "start": "python server.py",
+    "serve": "npx serve -l 8000 ."
+  },
+  "keywords": [
+    "renewable-energy",
+    "iot",
+    "solar-pv",
+    "wind-turbine",
+    "biogas"
+  ],
+  "author": "",
+  "license": "ISC"
+}

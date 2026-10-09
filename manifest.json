@@ -1,0 +1,18 @@
+{
+  "name": "Smart Renewable Energy & IoT Lab",
+  "short_name": "RenewableLab",
+  "description": "ระบบการเรียนรู้พลังงานทดแทนและระบบควบคุมอัตโนมัติ IoT อัจฉริยะ",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f172a'/%3E%3Cpath d='M50 15 L65 45 L52 45 L58 85 L35 50 L48 50 Z' fill='%2310b981'/%3E%3C/svg%3E",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
