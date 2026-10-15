@@ -10157,6 +10157,36 @@
     </div>
   </div>
 
+  <!-- MODAL: TEACHER AUTHENTICATION (PASSWORD CHECK) -->
+  <div id="teacherAuthModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-sm rounded-2xl border border-amber-500/40 p-6 shadow-2xl space-y-4 bg-slate-900/95 text-center">
+      <div class="w-12 h-12 mx-auto rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-white">ระบบรักษาความปลอดภัยครูผู้สอน</h3>
+        <p class="text-xs text-slate-400 mt-1">กรุณากรอกรหัสผ่านเพื่อเข้าสู่แผงควบคุมครูผู้สอน</p>
+      </div>
+      <form onsubmit="handleTeacherAuth(event)" class="space-y-3">
+        <div class="relative">
+          <input type="password" id="teacherPasswordInput" placeholder="กรอกรหัสผ่าน (4 หลัก)" maxlength="10" autocomplete="off"
+            class="w-full text-center tracking-widest text-lg font-mono bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl py-2.5 px-4 text-white placeholder-slate-600 outline-none transition-all">
+        </div>
+        <p id="teacherAuthError" class="text-xs text-rose-400 hidden flex items-center justify-center gap-1">
+          <i class="fa-solid fa-circle-exclamation"></i> รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
+        </p>
+        <div class="flex gap-2 pt-1">
+          <button type="button" onclick="closeTeacherAuthModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-all">
+            ยกเลิก
+          </button>
+          <button type="submit" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold transition-all shadow-lg shadow-amber-500/20">
+            ยืนยันรหัสผ่าน
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL: TEACHER CONTROL PANEL -->
   <div id="teacherModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
     <div class="glass-panel w-full max-w-3xl rounded-2xl border border-amber-500/30 p-5 sm:p-7 shadow-2xl space-y-5 my-8 max-h-[92vh] overflow-y-auto custom-scrollbar bg-slate-900/95">
@@ -11365,17 +11395,55 @@ function getOrCreateSheet(sheetName) {
 
     // Helper: LocalStorage Key
     const LS_GAS_URL_KEY = 'gas_sheet_api_url';
+    const TEACHER_PIN = '1234';
 
     function getSavedGasUrl() {
       return localStorage.getItem(LS_GAS_URL_KEY) || '';
     }
 
     function openTeacherModal() {
-      const saved = getSavedGasUrl();
-      document.getElementById('teacherGasUrlInput').value = saved;
-      document.getElementById('codeGsViewer').value = CODE_GS_SOURCE;
-      updateStudentShareUrlDisplay();
-      document.getElementById('teacherModal').classList.remove('hidden');
+      // Show password authentication modal first
+      const authModal = document.getElementById('teacherAuthModal');
+      const passInput = document.getElementById('teacherPasswordInput');
+      const errText = document.getElementById('teacherAuthError');
+      if (passInput) passInput.value = '';
+      if (errText) errText.classList.add('hidden');
+      if (authModal) {
+        authModal.classList.remove('hidden');
+        setTimeout(() => passInput && passInput.focus(), 100);
+      }
+    }
+
+    function closeTeacherAuthModal() {
+      const authModal = document.getElementById('teacherAuthModal');
+      const passInput = document.getElementById('teacherPasswordInput');
+      const errText = document.getElementById('teacherAuthError');
+      if (authModal) authModal.classList.add('hidden');
+      if (passInput) passInput.value = '';
+      if (errText) errText.classList.add('hidden');
+    }
+
+    function handleTeacherAuth(event) {
+      if (event) event.preventDefault();
+      const passInput = document.getElementById('teacherPasswordInput');
+      const errText = document.getElementById('teacherAuthError');
+      const enteredPassword = (passInput ? passInput.value : '').trim();
+
+      if (enteredPassword === TEACHER_PIN) {
+        closeTeacherAuthModal();
+        // Load teacher control panel
+        const saved = getSavedGasUrl();
+        document.getElementById('teacherGasUrlInput').value = saved;
+        document.getElementById('codeGsViewer').value = CODE_GS_SOURCE;
+        updateStudentShareUrlDisplay();
+        document.getElementById('teacherModal').classList.remove('hidden');
+      } else {
+        if (errText) errText.classList.remove('hidden');
+        if (passInput) {
+          passInput.value = '';
+          passInput.focus();
+        }
+      }
     }
 
     function closeTeacherModal() {
